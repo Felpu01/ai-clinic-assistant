@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Clinic Dashboard</title>
+    <title>AI Clinic SaaS Dashboard</title>
 
     <style>
         body {
@@ -16,12 +16,18 @@
         }
 
         h1 {
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #94a3b8;
             margin-bottom: 30px;
         }
 
+        /* ---------------- CARDS ---------------- */
         .cards {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(5, 1fr);
             gap: 20px;
             margin-bottom: 40px;
         }
@@ -30,11 +36,16 @@
             background: #1e293b;
             padding: 20px;
             border-radius: 16px;
+            transition: 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
         }
 
         .card h2 {
             margin: 0;
-            font-size: 32px;
+            font-size: 28px;
         }
 
         .card p {
@@ -42,6 +53,37 @@
             color: #94a3b8;
         }
 
+        /* ---------------- FUNNEL ---------------- */
+        .funnel {
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+        }
+
+        .funnel h3 {
+            margin-top: 0;
+        }
+
+        .funnel-bar {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .step {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            border-radius: 10px;
+            font-size: 14px;
+        }
+
+        .cold { background: #0ea5e9; }
+        .warm { background: #facc15; color: black; }
+        .hot { background: #22c55e; }
+
+        /* ---------------- TABLE ---------------- */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -61,17 +103,17 @@
             border-top: 1px solid #334155;
         }
 
-        .hot {
+        .tag-hot {
             color: #22c55e;
             font-weight: bold;
         }
 
-        .warm {
+        .tag-warm {
             color: #facc15;
             font-weight: bold;
         }
 
-        .cold {
+        .tag-cold {
             color: #38bdf8;
             font-weight: bold;
         }
@@ -80,8 +122,10 @@
 
 <body>
 
-    <h1>🚀 AI Clinic Dashboard</h1>
+    <h1>🚀 AI Clinic SaaS</h1>
+    <div class="subtitle">Dashboard de conversión de leads en tiempo real</div>
 
+    <!-- KPI CARDS -->
     <div class="cards">
 
         <div class="card">
@@ -91,21 +135,37 @@
 
         <div class="card">
             <h2 id="hot">0</h2>
-            <p>Hot Leads</p>
+            <p>🔥 Hot Leads</p>
         </div>
 
         <div class="card">
             <h2 id="warm">0</h2>
-            <p>Warm Leads</p>
+            <p>🟡 Warm Leads</p>
         </div>
 
         <div class="card">
             <h2 id="cold">0</h2>
-            <p>Cold Leads</p>
+            <p>🔵 Cold Leads</p>
+        </div>
+
+        <div class="card">
+            <h2 id="conversion">0%</h2>
+            <p>📈 Conversion Rate</p>
         </div>
 
     </div>
 
+    <!-- FUNNEL VISUAL -->
+    <div class="funnel">
+        <h3>Lead Funnel</h3>
+        <div class="funnel-bar">
+            <div class="step cold">Cold</div>
+            <div class="step warm">Warm</div>
+            <div class="step hot">Hot</div>
+        </div>
+    </div>
+
+    <!-- TABLE -->
     <table>
         <thead>
             <tr>
@@ -120,7 +180,6 @@
         <tbody id="leadsTable"></tbody>
     </table>
 
-    <!-- ✅ SAAS ARCHITECTURE CHANGE: JS SEPARADO -->
     <script src="/static/dashboard.js"></script>
 
 </body>
