@@ -1,16 +1,14 @@
-function getClinicId() {
-    const params = new URLSearchParams(window.location.search);
-    return params.get("clinic") || "default";
-}
-
-const clinicId = getClinicId();
-
 async function loadMetrics() {
 
     try {
 
-        const res = await fetch(`/metrics/${clinicId}`);
+        const res = await fetch('/metrics');
         const data = await res.json();
+
+        if (data.error) {
+            console.error("Unauthorized or error:", data.error);
+            return;
+        }
 
         document.getElementById('total').innerText = data.total_leads;
         document.getElementById('hot').innerText = data.hot_leads;
@@ -26,8 +24,13 @@ async function loadLeads() {
 
     try {
 
-        const res = await fetch(`/leads/${clinicId}`);
+        const res = await fetch('/leads');
         const leads = await res.json();
+
+        if (leads.error) {
+            console.error("Unauthorized or error:", leads.error);
+            return;
+        }
 
         const table = document.getElementById('leadsTable');
         table.innerHTML = '';
