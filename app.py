@@ -108,7 +108,7 @@ def ask_ai(message, user_id, lead_type):
 def check_plan_limit(clinic_id):
 
     if not supabase:
-        return True, None
+        return True, {}
 
     try:
         clinic = supabase.table("clinics") \
@@ -117,16 +117,17 @@ def check_plan_limit(clinic_id):
             .execute()
 
         if not clinic.data:
-            return False, None
+            return False, {}
 
         return True, clinic.data[0]
 
     except Exception as e:
         print("SUPABASE ERROR:", str(e))
-        return True, None
+        return True, {}
 
 
 def increment_usage(clinic_id):
+
     if not supabase:
         return
 
