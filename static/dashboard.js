@@ -8,15 +8,46 @@ async function loadMetrics() {
             return;
         }
 
+        // ---------------- KPI ----------------
         document.getElementById('total').innerText = data.total_leads;
         document.getElementById('hot').innerText = data.hot_leads;
         document.getElementById('warm').innerText = data.warm_leads;
         document.getElementById('cold').innerText = data.cold_leads;
 
-        // 🔥 NUEVO: conversion rate (SAAS VALUE METRIC)
         const conversionEl = document.getElementById('conversion');
         if (conversionEl) {
             conversionEl.innerText = (data.conversion_rate || 0) + "%";
+        }
+
+        // ---------------- PLAN INFO (SAAS CORE) ----------------
+        const planEl = document.getElementById('plan');
+        const usageEl = document.getElementById('usage');
+        const alertEl = document.getElementById('limitAlert');
+
+        const used = data.used || 0;
+        const limit = data.limit || 0;
+        const plan = data.plan || "FREE";
+
+        if (planEl) {
+            planEl.innerText = plan;
+        }
+
+        if (usageEl) {
+            usageEl.innerText = `${used} / ${limit} leads usados`;
+        }
+
+        // ---------------- ALERT SYSTEM ----------------
+        if (alertEl) {
+
+            if (limit > 0 && used >= limit) {
+                alertEl.style.display = "block";
+            } else if (limit > 0 && used >= limit * 0.8) {
+                alertEl.style.display = "block";
+                alertEl.innerText = "⚠️ Estás cerca del límite de tu plan.";
+                alertEl.style.background = "#92400e";
+            } else {
+                alertEl.style.display = "none";
+            }
         }
 
     } catch (err) {
@@ -35,7 +66,6 @@ async function loadLeads() {
         }
 
         const table = document.getElementById('leadsTable');
-
         if (!table) return;
 
         table.innerHTML = '';
@@ -47,7 +77,7 @@ async function loadLeads() {
             if (lead.lead_type === 'CALIENTE') typeClass = 'hot';
             if (lead.lead_type === 'TIBIO') typeClass = 'warm';
 
-            const row = `
+            table.innerHTML += `
                 <tr>
                     <td>${lead.user_id || '-'}</td>
                     <td>${lead.message || '-'}</td>
@@ -56,8 +86,6 @@ async function loadLeads() {
                     <td>${lead.stage}</td>
                 </tr>
             `;
-
-            table.innerHTML += row;
         });
 
     } catch (err) {
@@ -66,7 +94,7 @@ async function loadLeads() {
 }
 
 // -----------------------------
-// AUTO REFRESH (SAAS FEEL)
+// AUTO REFRESH (SAAS FEEL PRO)
 // -----------------------------
 function startAutoRefresh() {
     loadMetrics();
@@ -75,7 +103,7 @@ function startAutoRefresh() {
     setInterval(() => {
         loadMetrics();
         loadLeads();
-    }, 8000); // cada 8 segundos
+    }, 7000); // más “vivo” que antes
 }
 
 // -----------------------------
