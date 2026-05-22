@@ -54,6 +54,62 @@
             background: #16a34a;
         }
 
+        /* ---------------- DEMO BOX ---------------- */
+        .demo-box {
+            background: #1e293b;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+
+        .demo-box input {
+            width: 70%;
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+        }
+
+        .demo-box button {
+            padding: 10px 14px;
+            border: none;
+            border-radius: 8px;
+            background: #22c55e;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .demo-response {
+            margin-top: 10px;
+            color: #94a3b8;
+        }
+
+        /* ---------------- PRICING ---------------- */
+        .pricing {
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 16px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .price-card {
+            background: #0f172a;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .highlight {
+            border: 2px solid #22c55e;
+        }
+
         /* ---------------- CARDS ---------------- */
         .cards {
             display: grid;
@@ -66,11 +122,6 @@
             background: #1e293b;
             padding: 20px;
             border-radius: 16px;
-            transition: 0.2s;
-        }
-
-        .card:hover {
-            transform: translateY(-3px);
         }
 
         .card h2 {
@@ -118,7 +169,6 @@
         .warm { background: #facc15; color: black; }
         .hot { background: #22c55e; }
 
-        /* ---------------- TABLE ---------------- */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -152,17 +202,27 @@
             <div class="plan-info" id="usage">0 / 0 leads usados</div>
         </div>
 
-        <button class="upgrade-btn" onclick="alert('Ir a Stripe / Upgrade flow')">
+        <button class="upgrade-btn" onclick="alert('Stripe upgrade flow')">
             Upgrade Plan
         </button>
     </div>
 
-    <!-- ALERTA LIMITE -->
+    <!-- ALERTA -->
     <div class="alert" id="limitAlert">
-        ⚠️ Has alcanzado el límite de tu plan. Upgrade para seguir recibiendo pacientes.
+        ⚠️ Estás cerca o en el límite de tu plan.
     </div>
 
-    <!-- KPI CARDS -->
+    <!-- 🧪 DEMO IA -->
+    <div class="demo-box">
+        <h3>🧪 Probar IA en vivo</h3>
+
+        <input id="demoInput" placeholder="Escribe consulta de paciente...">
+        <button onclick="sendDemo()">Probar</button>
+
+        <div class="demo-response" id="demoResponse"></div>
+    </div>
+
+    <!-- KPI -->
     <div class="cards">
 
         <div class="card">
@@ -216,6 +276,37 @@
 
         <tbody id="leadsTable"></tbody>
     </table>
+
+    <!-- 💰 PRICING -->
+    <div class="pricing">
+        <h3>💰 Planes</h3>
+
+        <div class="pricing-grid">
+
+            <div class="price-card">
+                <h4>FREE</h4>
+                <p>50 leads</p>
+                <p>IA básica</p>
+            </div>
+
+            <div class="price-card">
+                <h4>PRO</h4>
+                <p>500 leads</p>
+                <p>IA + métricas</p>
+            </div>
+
+            <div class="price-card highlight">
+                <h4>CLINIC PRO</h4>
+                <p>Ilimitado</p>
+                <p>Automatización total</p>
+            </div>
+
+        </div>
+
+        <button style="width:100%;margin-top:15px;padding:12px;background:#22c55e;border:none;border-radius:10px;font-weight:bold;">
+            Upgrade ahora
+        </button>
+    </div>
 
     <script src="/static/dashboard.js"></script>
 
