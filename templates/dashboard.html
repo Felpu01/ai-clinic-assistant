@@ -42,6 +42,22 @@
 
         .upgrade-btn:hover { background: #16a34a; }
 
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 16px;
+        }
+
+        .card h2 { margin: 0; font-size: 28px; }
+        .card p { margin-top: 10px; color: #94a3b8; }
+
         .demo-box {
             background: #1e293b;
             padding: 15px;
@@ -67,12 +83,31 @@
 
         .demo-response { margin-top: 10px; color: #94a3b8; }
 
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #1e293b;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-top: 30px;
+        }
+
+        th {
+            background: #334155;
+            padding: 14px;
+            text-align: left;
+        }
+
+        td {
+            padding: 14px;
+            border-top: 1px solid #334155;
+        }
+
         .pricing {
             background: #1e293b;
             padding: 20px;
             border-radius: 16px;
             margin-top: 30px;
-            margin-bottom: 30px;
         }
 
         .pricing-grid {
@@ -90,74 +125,6 @@
         }
 
         .highlight { border: 2px solid #22c55e; }
-
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-
-        .card {
-            background: #1e293b;
-            padding: 20px;
-            border-radius: 16px;
-        }
-
-        .card h2 { margin: 0; font-size: 28px; }
-        .card p { margin-top: 10px; color: #94a3b8; }
-
-        .alert {
-            background: #7f1d1d;
-            padding: 12px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            display: none;
-        }
-
-        .funnel {
-            background: #1e293b;
-            padding: 20px;
-            border-radius: 16px;
-            margin-bottom: 30px;
-        }
-
-        .funnel-bar {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .step {
-            flex: 1;
-            padding: 10px;
-            text-align: center;
-            border-radius: 10px;
-            font-size: 14px;
-        }
-
-        .cold { background: #0ea5e9; }
-        .warm { background: #facc15; color: black; }
-        .hot { background: #22c55e; }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background: #1e293b;
-            border-radius: 16px;
-            overflow: hidden;
-        }
-
-        th {
-            background: #334155;
-            padding: 14px;
-            text-align: left;
-        }
-
-        td {
-            padding: 14px;
-            border-top: 1px solid #334155;
-        }
     </style>
 </head>
 
@@ -166,56 +133,34 @@
     <h1>🚀 AI Clinic SaaS</h1>
     <div class="subtitle">Sistema de conversión de pacientes en tiempo real</div>
 
-    <!-- PLAN BAR -->
+    <!-- PLAN -->
     <div class="plan-bar">
         <div>
             <div><strong id="plan">FREE</strong> plan</div>
             <div class="plan-info" id="usage">0 / 0 leads usados</div>
         </div>
 
-        <!-- 🔥 STRIPE REAL -->
         <div>
-            <button class="upgrade-btn" onclick="buyPlan('BASIC')">
-                Upgrade BASIC
-            </button>
-
-            <button class="upgrade-btn" style="margin-left:10px;background:#a855f7;color:white;" onclick="buyPlan('PRO')">
-                Upgrade PRO
-            </button>
+            <button class="upgrade-btn" onclick="buyPlan('BASIC')">Upgrade BASIC</button>
+            <button class="upgrade-btn" style="margin-left:10px;background:#a855f7;color:white;" onclick="buyPlan('PRO')">Upgrade PRO</button>
         </div>
-    </div>
-
-    <div class="alert" id="limitAlert">
-        ⚠️ Estás cerca o en el límite de tu plan.
-    </div>
-
-    <!-- DEMO IA -->
-    <div class="demo-box">
-        <h3>🧪 Probar IA en vivo</h3>
-
-        <input id="demoInput" placeholder="Escribe consulta de paciente...">
-        <button onclick="sendDemo()">Probar</button>
-
-        <div class="demo-response" id="demoResponse"></div>
     </div>
 
     <!-- KPI -->
     <div class="cards">
         <div class="card"><h2 id="total">0</h2><p>Total Leads</p></div>
-        <div class="card"><h2 id="hot">0</h2><p>🔥 Hot Leads</p></div>
-        <div class="card"><h2 id="warm">0</h2><p>🟡 Warm Leads</p></div>
-        <div class="card"><h2 id="cold">0</h2><p>🔵 Cold Leads</p></div>
-        <div class="card"><h2 id="conversion">0%</h2><p>📈 Conversion Rate</p></div>
+        <div class="card"><h2 id="hot">0</h2><p>Hot</p></div>
+        <div class="card"><h2 id="warm">0</h2><p>Warm</p></div>
+        <div class="card"><h2 id="cold">0</h2><p>Cold</p></div>
+        <div class="card"><h2 id="conversion">0%</h2><p>Conversion</p></div>
     </div>
 
-    <!-- FUNNEL -->
-    <div class="funnel">
-        <h3>Lead Funnel</h3>
-        <div class="funnel-bar">
-            <div class="step cold">Cold</div>
-            <div class="step warm">Warm</div>
-            <div class="step hot">Hot</div>
-        </div>
+    <!-- DEMO -->
+    <div class="demo-box">
+        <h3>🧪 IA Demo</h3>
+        <input id="demoInput" placeholder="Escribe mensaje...">
+        <button onclick="sendDemo()">Probar</button>
+        <div class="demo-response" id="demoResponse"></div>
     </div>
 
     <!-- TABLE -->
@@ -240,52 +185,40 @@
             <div class="price-card">
                 <h4>FREE</h4>
                 <p>50 leads</p>
-                <p>IA básica</p>
             </div>
 
             <div class="price-card">
                 <h4>BASIC</h4>
                 <p>300 leads</p>
-                <p>IA + métricas</p>
             </div>
 
             <div class="price-card highlight">
                 <h4>PRO</h4>
                 <p>Ilimitado</p>
-                <p>Automatización total</p>
             </div>
         </div>
-
-        <button class="upgrade-btn" style="width:100%;margin-top:15px;" onclick="buyPlan('PRO')">
-            Upgrade ahora
-        </button>
     </div>
 
-    <script src="/static/dashboard.js"></script>
-
-    <!-- 🔥 STRIPE FLOW -->
+    <!-- STRIPE -->
     <script>
-        function buyPlan(plan) {
-            fetch("/create-checkout-session", {
+        async function buyPlan(plan) {
+            const res = await fetch("/create-checkout-session", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ plan })
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.url) {
-                    window.location.href = data.url;
-                } else {
-                    alert("Error Stripe: " + JSON.stringify(data));
-                }
-            })
-            .catch(err => {
-                alert("Error: " + err);
             });
+
+            const data = await res.json();
+
+            if (data.url) {
+                window.location.href = data.url;
+            } else {
+                alert("Error Stripe");
+            }
         }
     </script>
+
+    <script src="/static/dashboard.js"></script>
 
 </body>
 
