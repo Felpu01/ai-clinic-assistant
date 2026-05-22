@@ -16,12 +16,42 @@
         }
 
         h1 {
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
 
         .subtitle {
             color: #94a3b8;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
+        }
+
+        /* ---------------- PLAN BAR ---------------- */
+        .plan-bar {
+            background: #1e293b;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .plan-info {
+            font-size: 14px;
+            color: #94a3b8;
+        }
+
+        .upgrade-btn {
+            background: #22c55e;
+            color: black;
+            border: none;
+            padding: 10px 14px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .upgrade-btn:hover {
+            background: #16a34a;
         }
 
         /* ---------------- CARDS ---------------- */
@@ -53,16 +83,21 @@
             color: #94a3b8;
         }
 
+        /* ---------------- ALERT ---------------- */
+        .alert {
+            background: #7f1d1d;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
         /* ---------------- FUNNEL ---------------- */
         .funnel {
             background: #1e293b;
             padding: 20px;
             border-radius: 16px;
             margin-bottom: 30px;
-        }
-
-        .funnel h3 {
-            margin-top: 0;
         }
 
         .funnel-bar {
@@ -102,28 +137,30 @@
             padding: 14px;
             border-top: 1px solid #334155;
         }
-
-        .tag-hot {
-            color: #22c55e;
-            font-weight: bold;
-        }
-
-        .tag-warm {
-            color: #facc15;
-            font-weight: bold;
-        }
-
-        .tag-cold {
-            color: #38bdf8;
-            font-weight: bold;
-        }
     </style>
 </head>
 
 <body>
 
     <h1>🚀 AI Clinic SaaS</h1>
-    <div class="subtitle">Dashboard de conversión de leads en tiempo real</div>
+    <div class="subtitle">Sistema de conversión de pacientes en tiempo real</div>
+
+    <!-- PLAN BAR -->
+    <div class="plan-bar">
+        <div>
+            <div><strong id="plan">FREE</strong> plan</div>
+            <div class="plan-info" id="usage">0 / 0 leads usados</div>
+        </div>
+
+        <button class="upgrade-btn" onclick="alert('Ir a Stripe / Upgrade flow')">
+            Upgrade Plan
+        </button>
+    </div>
+
+    <!-- ALERTA LIMITE -->
+    <div class="alert" id="limitAlert">
+        ⚠️ Has alcanzado el límite de tu plan. Upgrade para seguir recibiendo pacientes.
+    </div>
 
     <!-- KPI CARDS -->
     <div class="cards">
@@ -155,7 +192,7 @@
 
     </div>
 
-    <!-- FUNNEL VISUAL -->
+    <!-- FUNNEL -->
     <div class="funnel">
         <h3>Lead Funnel</h3>
         <div class="funnel-bar">
