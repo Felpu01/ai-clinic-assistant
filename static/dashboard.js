@@ -1,8 +1,15 @@
+function getClinicId() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get("clinic") || "default";
+}
+
+const clinicId = getClinicId();
+
 async function loadMetrics() {
 
     try {
 
-        const res = await fetch('/metrics/default');
+        const res = await fetch(`/metrics/${clinicId}`);
         const data = await res.json();
 
         document.getElementById('total').innerText = data.total_leads;
@@ -19,7 +26,7 @@ async function loadLeads() {
 
     try {
 
-        const res = await fetch('/leads/default');
+        const res = await fetch(`/leads/${clinicId}`);
         const leads = await res.json();
 
         const table = document.getElementById('leadsTable');
